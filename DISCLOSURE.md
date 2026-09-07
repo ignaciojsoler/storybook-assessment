@@ -1,8 +1,6 @@
 # AI disclosure
 
-Replace this file. Empty “I used Cursor” is not enough.
-
-- **Tools:** (Cursor, Claude, Copilot, none, …)
-- **I decided:** (API, layout, states, a11y — what was a human call)
-- **The model generated:** (which files / chunks)
-- **If I had more time:** (what you would change)
+- **Tools:** OpenCode with Muse Spark (Meta `muse-spark-1.3`). No other AI tools. Docs consulted: Storybook 10 CSF + Testing Library + existing `Primitives/*` stories as the API bar.
+- **I decided:** the controlled prop contract (panel owns no state; stories own state + `useFakeStream`); the visual system (420px shell, user bubble vs plain assistant row, pill citations with per-kind Lucide icons, caret for streaming, `role="alert"` retry box); the a11y plan (`role="log"` thread, `aria-busy` + `aria-live="off"` so tokens don't spam screen readers, `article` names, Enter/Shift+Enter); and every iteration call afterwards — dropping the generating-spinner during streaming, the modern bar/circular/pill look using tokens only, citations rendering after streaming, copy as props instead of hardcoded strings, smooth scrolling, the optional `onClose`, and what stayed out of scope (stick-to-bottom hook, microphone, narrow-viewport layout, backend). I also found the long-word overflow bug in manual QA and defined the final 4-commit history.
+- **The model generated:** code drafts for `src/assistant/*.tsx`, the story simulation hook, the four story files, and the four test files — all written under those decisions and verified by me: `tsc -b` clean, `npm test` 17 green, `build-storybook` OK, plus manual passes over the five stories in light and dark.
+- **If I had more time:** focus management after submit/retry; a throttled live-region summary for long streams; visual regression coverage for light/dark at 420px; a stick-to-bottom that releases when scrolling up (deferred on purpose); and empty-state copy variants per clinical context.
