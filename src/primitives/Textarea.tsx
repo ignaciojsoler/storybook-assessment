@@ -1,13 +1,15 @@
-import type { TextareaHTMLAttributes } from 'react';
+import type { Ref, TextareaHTMLAttributes } from 'react';
 import { cn } from '@/lib/cn';
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   error?: boolean;
+  ref?: Ref<HTMLTextAreaElement>;
 };
 
-export function Textarea({ className, error, ...props }: TextareaProps) {
+export function Textarea({ className, error, ref, ...props }: TextareaProps) {
   return (
     <textarea
+      ref={ref}
       aria-invalid={error || undefined}
       className={cn(
         'min-h-20 w-full rounded-[var(--radius-sm)] border bg-bg-surface px-3 py-2 text-sm text-text-primary',
